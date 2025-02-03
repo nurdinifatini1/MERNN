@@ -8,6 +8,11 @@ let token ;
 
 token = req.cookies.jwt;
 
+// Fallback: Check Authorization header if cookie is missing
+if (!token && req.headers.authorization?.startsWith('Bearer')) {
+  token = req.headers.authorization.split(' ')[1];
+}
+
 if (token) {
 
     try{
